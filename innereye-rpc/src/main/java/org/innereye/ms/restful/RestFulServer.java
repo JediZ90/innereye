@@ -75,7 +75,7 @@ public class RestFulServer {
         bossGroup = new NioEventLoopGroup();
         workerGroup = new NioEventLoopGroup();
         serverBootstrap = new ServerBootstrap();
-        serverBootstrap.option(ChannelOption.SO_BACKLOG, 1024);
+        serverBootstrap.option(ChannelOption.SO_BACKLOG, 1024).option(ChannelOption.TCP_NODELAY, true);
         serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).handler(new LoggingHandler(LogLevel.INFO)).childHandler(new JaxrsHttpChannelInitializer(application, IS_SECURE, sslType, ROOT_PATH));
     }
 
