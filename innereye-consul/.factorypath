@@ -1,0 +1,4 @@
+<factorypath>
+    <factorypathentry kind="PLUGIN" id="org.eclipse.jst.ws.annotations.core" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="/Users/zhangbaohao/mygoo/lib/value-2.5.6.jar" enabled="true" runInBatchMode="false"/>
+</factorypath>

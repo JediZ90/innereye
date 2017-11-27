@@ -1,0 +1,6 @@
+org.innereye.ms.compress.impl.GzipCompress
+org.innereye.ms.compress.impl.DeflaterCompress
+org.innereye.ms.compress.impl.Bzip2Compress
+org.innereye.ms.compress.impl.Lz4Compress
+org.innereye.ms.compress.impl.LzoCompress
+org.innereye.ms.compress.impl.SnappyCompress

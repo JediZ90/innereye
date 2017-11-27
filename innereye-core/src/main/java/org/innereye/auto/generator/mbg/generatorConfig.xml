@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<context id="InnerEye-DB2Tables" defaultModelType="conditional" targetRuntime="MyBatis3">
+        
+        <plugin type="org.mybatis.generator.plugins.FluentBuilderMethodsPlugin" />
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <plugin type="org.innereye.auto.generator.mbg.plugins.SelectivePlugin" />
+        <plugin type="org.innereye.auto.generator.mbg.plugins.MoveExampleClassPlugin">
+            <property name="targetPackage" value="org.innereye.web.mbg.mapper.example"/>
+        </plugin>
+	
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://sloth.org:3306/innereye?useSSL=false" userId="root" password="sloth@linux">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="org.innereye.web.mbg.model" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="innereye.mybatis.mapper.mbg" targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER" targetPackage="org.innereye.web.mbg.mapper" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<table tableName="ie_account">
+			<generatedKey column="ID" sqlStatement="MySql" />
+		</table>
+		
+	</context>
+</generatorConfiguration>
