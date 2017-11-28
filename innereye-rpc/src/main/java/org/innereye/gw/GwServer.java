@@ -17,9 +17,9 @@ import io.netty.handler.logging.LoggingHandler;
 /**
  * 基于Netty实现的代理网关
  */
-public class ProxyServer {
+public class GwServer {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProxyServer.class);
+    private static final Logger logger = LoggerFactory.getLogger(GwServer.class);
 
     public final int PORT;
 
@@ -41,11 +41,11 @@ public class ProxyServer {
      * @param port
      *            暴露端口号
      */
-    public ProxyServer(boolean isSecure, int port){
+    public GwServer(boolean isSecure, int port){
         this(isSecure, SSLType.SIMPLE, port);
     }
 
-    public ProxyServer(boolean isSecure, SSLType sslType, int port){
+    public GwServer(boolean isSecure, SSLType sslType, int port){
         this.PORT = port;
         this.IS_SECURE = isSecure;
         // Configure the server.
@@ -53,10 +53,7 @@ public class ProxyServer {
         workerGroup = new NioEventLoopGroup();
         serverBootstrap = new ServerBootstrap();
         serverBootstrap.option(ChannelOption.SO_BACKLOG, 1024).option(ChannelOption.TCP_NODELAY, true);
-        serverBootstrap.group(bossGroup, workerGroup)
-            .channel(NioServerSocketChannel.class)
-            .handler(new LoggingHandler(LogLevel.INFO))
-            .childHandler(new HttpProxyChannelInitializer(isSecure, sslType));
+        serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).handler(new LoggingHandler(LogLevel.INFO)).childHandler(new HttpProxyChannelInitializer(isSecure, sslType));
     }
 
     /**
@@ -105,17 +102,10 @@ public class ProxyServer {
     }
 
     public static void main(String[] args) {
-        ProxyServer server = null;
+        GwServer server = null;
         try {
-            if (args.length == 2) {
-                boolean isSecure = Boolean.valueOf(args[0]);
-                int port = Integer.valueOf(args[1]);
-                server = new ProxyServer(isSecure, port);
-                server.start();
-            }
-            else {
-                throw new RuntimeException("参数个数必须为2个!!!");
-            }
+            server = new GwServer(false, 8000);
+            server.start();
         }
         catch (Exception e) {
             if (server != null) {
